@@ -32,7 +32,10 @@ class Textarea {
         )
 
         setTimeout(
-            () => textarea.focus(),
+            () => {
+                if (this.readonly) return
+                    textarea.focus()
+            },
             0
         )
 
