@@ -1,7 +1,7 @@
 import Textarea from './Textarea'
 
 const textareaElement1 = new Textarea(
-    '{ "name": "Marcin" }', 
+    '{ name: "Marcin" }', 
     console.log,
     false
     )
