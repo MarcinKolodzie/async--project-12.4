@@ -1,4 +1,5 @@
 import Textarea from './Textarea'
+import Select from './Select'
 
 export class App {
     constructor() {
@@ -31,9 +32,11 @@ export class App {
             true
         )
 
+        const selectElement = new Select()
 
         this.container.appendChild(textareaElement1.render())
         this.container.appendChild(textareaElement2.render())
+        this.container.appendChild(selectElement.render())
 
         return this.container
     }
