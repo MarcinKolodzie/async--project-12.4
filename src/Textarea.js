@@ -1,9 +1,10 @@
 class Textarea {
 
-    constructor(value, onChange, readonly) {
+    constructor(value, onChange, readonly, isFocused) {
         this.readonly = readonly
         this.value = value
         this.onChange = onChange
+        this.isFocused = isFocused
     }
 
     render() {
@@ -31,13 +32,12 @@ class Textarea {
             (e) => this.onChange(e.target.value)
         )
 
-        setTimeout(
-            () => {
-                if (this.readonly) return
-                    textarea.focus()
-            },
-            0
-        )
+        if (!this.readonly && this.isFocused) {
+            setTimeout(
+                () => textarea.focus(),
+                0
+            )
+        }
 
         div.appendChild(textarea)
         div.appendChild(p)
