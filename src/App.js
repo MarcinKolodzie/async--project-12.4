@@ -1,15 +1,23 @@
 import Textarea from './Textarea'
 import Select from './Select'
+import Input from './Input'
+import Button from './Button'
 
 export class App {
     constructor() {
         this.container = null
         this.requestBody = '{ "name": "Marcin" }'
         this.responseBody = '{ "name": "Michał" }'
+        this.method = 'GET'
     }
 
     onRequestBodyChange(newValue) {
         this.requestBody = newValue
+        this.render()
+    }
+
+    onRequestMethodChange(nweMethod) {
+        this.method = nweMethod
         this.render()
     }
 
@@ -21,30 +29,40 @@ export class App {
 
         this.container.innerHTML = ''
 
-        const textareaElement1 = new Textarea(
+        const textareaElementRequestBody = new Textarea(
             this.requestBody,
             (newValue) => this.onRequestBodyChange(newValue),
             false
         )
-        const textareaElement2 = new Textarea(
+
+        const buttonElementSendRequest = new Button(
+            'Send request',
+            () => console.log('Send request')
+        )
+
+        const textareaElementResponse = new Textarea(
             this.responseBody,
             () => { },
             true
         )
 
-        const selectElement = new Select(
+        const selectElementMethod = new Select(
             [
-                { label: 'First', value: 1 },
-                { label: 'Second', value: 2 },
-                { label: 'Third', value: 3 }
+                { label: 'Method: GET', value: 'GET' },
+                { label: 'Method: POST', value: 'POST' },
+                { label: 'Method: PUT', value: 'PUT' },
+                { label: 'Method: PATCH', value: 'PATCH' },
+                { label: 'Method: DELETE', value: 'DELETE' }
             ],
-            2,
-            console.log
+            this.method,
+            this.onRequestMethodChange.bind(this)
+            // (nweMethod) => onRequestMethodChange(nweMethod)
         )
 
-        this.container.appendChild(textareaElement1.render())
-        this.container.appendChild(textareaElement2.render())
-        this.container.appendChild(selectElement.render())
+        this.container.appendChild(textareaElementRequestBody.render())
+        this.container.appendChild(buttonElementSendRequest.render())
+        this.container.appendChild(textareaElementResponse.render())
+        this.container.appendChild(selectElementMethod.render())
 
         return this.container
     }
