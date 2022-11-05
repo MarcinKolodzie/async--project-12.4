@@ -33,10 +33,7 @@ class Textarea {
         )
 
         if (!this.readonly && this.isFocused) {
-            setTimeout(
-                () => textarea.focus(),
-                0
-            )
+            queueMicrotask(() => textarea.focus())
         }
 
         div.appendChild(textarea)
