@@ -1,9 +1,27 @@
 export class Select {
 
-    constructor(options, value, onChange){}
+    constructor(options, value, onChange) {
 
-    render(){
+        this.options = [
+            { label: 'First', value: 1 },
+            { label: 'Second', value: 2 },
+            { label: 'Third', value: 3 }
+        ]
+
+    }
+
+    render() {
         const select = document.createElement('select')
+
+        this.options.forEach(({ label, value }) => {
+            const option = document.createElement('option')
+
+            option.value = value
+            option.innerText = label
+
+            select.appendChild(option)
+
+        });
 
         return select
     }
