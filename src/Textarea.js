@@ -31,6 +31,11 @@ class Textarea {
             (e) => this.onChange(e.target.value)
         )
 
+        setTimeout(
+            () => textarea.focus(),
+            0
+        )
+
         div.appendChild(textarea)
         div.appendChild(p)
 
